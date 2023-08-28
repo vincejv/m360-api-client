@@ -1,0 +1,276 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>vincejv</id>
+      <name>Vince Jerald Villamora</name>
+      <email>vincevillamora@gmail.com</email>
+      <timezone>+8</timezone>
+      <organization>Abavilla</organization>
+      <organizationUrl>https://github.com/vincejv</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>https://github.com/vincejv/m360-api-client</url>
+    <connection>scm:git:git://github.com/vincejv/m360-api-client.git</connection>
+    <developerConnection>scm:git:git@github.com:vincejv/m360-api-client.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+	<groupId>com.vincejv</groupId>
+	<artifactId>m360-api-client</artifactId>
+	<version>0</version>
+	<packaging>jar</packaging>
+
+	<name>M360 API Client</name>
+  <description>Easily integrate M360 API to your Java application</description>
+  <url>https://github.com/vincejv/m360-api-client</url>
+  <inceptionYear>2022</inceptionYear>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<compiler-plugin.version>3.11.0</compiler-plugin.version>
+		<maven.compiler.release>17</maven.compiler.release>
+		<org.projectlombok.version>1.18.28</org.projectlombok.version>
+		<jacoco.version>0.8.10</jacoco.version>
+
+    <sonar.organization>vincejv</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+    <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+    <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+
+    <!-- repository settings for deployment -->
+    <maven.deploy.nexus.repository-id>ossrh</maven.deploy.nexus.repository-id>
+    <maven.deploy.nexus.base-url>https://s01.oss.sonatype.org/</maven.deploy.nexus.base-url>
+    <maven.deploy.nexus.repository-url>${maven.deploy.nexus.base-url}service/local/staging/deploy/maven2
+    </maven.deploy.nexus.repository-url>
+
+    <!-- repository settings for snapshot release -->
+    <maven.deploy.nexus.snapshot.repository-id>${maven.deploy.nexus.repository-id}
+    </maven.deploy.nexus.snapshot.repository-id>
+    <maven.deploy.nexus.snapshot.repository-url>${maven.deploy.nexus.base-url}content/repositories/snapshots
+    </maven.deploy.nexus.snapshot.repository-url>
+	</properties>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>${maven.deploy.nexus.snapshot.repository-id}</id>
+      <url>${maven.deploy.nexus.snapshot.repository-url}</url>
+    </snapshotRepository>
+    <repository>
+      <id>${maven.deploy.nexus.repository-id}</id>
+      <url>${maven.deploy.nexus.repository-url}</url>
+    </repository>
+  </distributionManagement>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/vincejv/dtone-dvs-api-java-client/issues</url>
+  </issueManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.5.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.28</version>
+			<scope>provided</scope>
+		</dependency>
+  </dependencies>
+
+	<build>
+		<plugins>
+		
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler-plugin.version}</version>
+				<configuration>
+					<compilerArgs>
+						<arg>-parameters</arg>
+					</compilerArgs>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${org.projectlombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jboss.jandex</groupId>
+				<artifactId>jandex-maven-plugin</artifactId>
+				<version>1.2.3</version>
+				<executions>
+					<execution>
+						<id>make-index</id>
+						<goals>
+							<goal>jandex</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+				  <execution>
+					<id>make-assembly</id>
+					<phase>package</phase> 
+					<goals>
+						<goal>single</goal>
+					</goals>
+				  </execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+	</build>
+
+  <profiles>
+    <profile>
+      <id>release-for-oss</id>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>${maven-source-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${maven-javadoc-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>${maven-gpg-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>${nexus-staging-maven-plugin.version}</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>${maven.deploy.nexus.repository-id}</serverId>
+              <nexusUrl>${maven.deploy.nexus.base-url}</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              <stagingProgressTimeoutMinutes>120</stagingProgressTimeoutMinutes>
+            </configuration>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>allow-snapshots</id>
+      <repositories>
+        <repository>
+          <id>${maven.deploy.nexus.snapshot.repository-id}</id>
+          <url>${maven.deploy.nexus.snapshot.repository-url}</url>
+          <releases><enabled>false</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+</project>
