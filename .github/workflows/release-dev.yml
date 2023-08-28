@@ -5,8 +5,8 @@ on:
     types: [ opened, synchronize, reopened ]
 
 env:
-  SONAR_PROJECT_KEY: vincejv_dtone-dvs-api-java-client
-  MVN_ARTIFACT_ID: dvs-apiclient
+  SONAR_PROJECT_KEY: vincejv_m360-api-client
+  MVN_ARTIFACT_ID: m360-api-client
 
 jobs:
 
