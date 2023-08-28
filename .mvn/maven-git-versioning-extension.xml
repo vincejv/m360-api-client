@@ -19,7 +19,7 @@
                xsi:schemaLocation="https://github.com/qoomon/maven-git-versioning-extension https://qoomon.github.io/maven-git-versioning-extension/configuration-9.1.0.xsd">
   <refs considerTagsOnBranches="true">
     <ref type="branch">
-      <pattern>master</pattern> <!-- expects that main branch is 1 commit = 1 tag -->
+      <pattern>main</pattern> <!-- expects that main branch is 1 commit = 1 tag -->
       <describeTagPattern><![CDATA[v(?<version>.*)]]></describeTagPattern>
       <version>${describe.tag.version}</version>
       <properties>
