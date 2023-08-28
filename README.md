@@ -2,17 +2,17 @@
 
 <img src="banner.png" alt="FPI Framework" width="500"/>
 
-[![Maven Central version](https://img.shields.io/maven-central/v/com.vincejv/dvs-apiclient?logo=apache-maven)](https://search.maven.org/artifact/com.vincejv/dtone-dvs-api-java-client-core)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/vincejv/dtone-dvs-api-java-client/Maven%20Central%20deployment?label=CI/CD&logo=github)](https://github.com/vincejv/dtone-dvs-api-java-client/actions?query=workflow%3A%22Maven+Central+deployment%22)
-[![License](https://img.shields.io/github/license/vincejv/dtone-dvs-api-java-client?logo=apache)](https://github.com/vincejv/dtone-dvs-api-java-client/blob/main/LICENSE)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/vincejv/dtone-dvs-api-java-client?label=commits&logo=git)](https://github.com/vincejv/dtone-dvs-api-java-client/pulse)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=vincejv_dtone-dvs-api-java-client&metric=alert_status)](https://sonarcloud.io/dashboard?id=vincejv_dtone-dvs-api-java-client)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=vincejv_dtone-dvs-api-java-client&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=vincejv_dtone-dvs-api-java-client)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=vincejv_dtone-dvs-api-java-client&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=vincejv_dtone-dvs-api-java-client)
-[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=vincejv_dtone-dvs-api-java-client&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=vincejv_dtone-dvs-api-java-client)
-[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vincejv_dtone-dvs-api-java-client&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=vincejv_dtone-dvs-api-java-client)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=vincejv_dtone-dvs-api-java-client&metric=security_rating)](https://sonarcloud.io/dashboard?id=vincejv_dtone-dvs-api-java-client)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=vincejv_dtone-dvs-api-java-client&metric=ncloc)](https://sonarcloud.io/dashboard?id=vincejv_dtone-dvs-api-java-client)
+[![Maven Central version](https://img.shields.io/maven-central/v/com.vincejv/m360-api-client?logo=apache-maven)](https://search.maven.org/artifact/com.vincejv/m360-api-client)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/vincejv/m360-api-client/Maven%20Central%20deployment?label=CI/CD&logo=github)](https://github.com/vincejv/m360-api-client/actions?query=workflow%3A%22Maven+Central+deployment%22)
+[![License](https://img.shields.io/github/license/vincejv/m360-api-client?logo=apache)](https://github.com/vincejv/m360-api-client/blob/main/LICENSE)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/vincejv/m360-api-client?label=commits&logo=git)](https://github.com/vincejv/m360-api-client/pulse)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=vincejv_m360-api-client&metric=alert_status)](https://sonarcloud.io/dashboard?id=vincejv_m360-api-client)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=vincejv_m360-api-client&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=vincejv_m360-api-client)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=vincejv_m360-api-client&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=vincejv_m360-api-client)
+[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=vincejv_m360-api-client&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=vincejv_m360-api-client)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vincejv_m360-api-client&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=vincejv_m360-api-client)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=vincejv_m360-api-client&metric=security_rating)](https://sonarcloud.io/dashboard?id=vincejv_m360-api-client)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=vincejv_m360-api-client&metric=ncloc)](https://sonarcloud.io/dashboard?id=vincejv_m360-api-client)
 
 Language: Java
 
@@ -50,7 +50,7 @@ This library deals with the following list of domain objects from the DVS API:
            <dependency>
                <groupId>com.vincejv</groupId>
                <artifactId>m360-api-client</artifactId>
-               <version>1.0.0</version> <!-- replace with latest version -->
+               <version>1.0.2</version> <!-- replace with latest version -->
            </dependency>
            ```
     2. Standalone JAR
@@ -61,8 +61,8 @@ This library deals with the following list of domain objects from the DVS API:
     ```java
     import com.vincejv.m360;
     
-    var m360Client = new M360ApiClient(String baseApiUrl, 
-      String appKey, String appSecret, String senderId)
+    var m360Client = new M360ApiClient(String baseApiUrl, String appKey,
+          String appSecret, String senderId)
     ```
 - Start calling the M360 API!
 
@@ -71,10 +71,6 @@ This library deals with the following list of domain objects from the DVS API:
 - Should an application create more than one `M360ApiClient`?
     
     There should be no need to do that in a single application.
-    
-- Is it mandatory to set all values in a filter instance?
-    
-    No
 
 ## License
 - [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt)
