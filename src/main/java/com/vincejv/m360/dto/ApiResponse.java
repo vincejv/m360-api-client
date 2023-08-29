@@ -12,19 +12,27 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponse<T> {
+
   private boolean success;
+
   private int code;
+
   private List<ApiError> errors;
+
   private T result;
 
   private int totalPages;
+
   private int totalRecords;
+
   private int currentPage;
+
   private int recordsPerPage;
+
   private int nextPage;
+
   private int previousPage;
 
   public ApiResponse(boolean success, Integer code, List<ApiError> errors) {

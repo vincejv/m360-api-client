@@ -7,6 +7,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 import com.vincejv.m360.dto.ApiError;
 import com.vincejv.m360.dto.ApiResponse;
@@ -33,8 +34,8 @@ public class ApiResponseBuilder {
    * @param future    the future http response
    * @return the final api response
    */
-  public <T> CompletableFuture<ApiResponse<T>> prepareResponse(ApiResponse<T> apiResponse, TypeReference<T> typeReference,
-                                                               CompletableFuture<HttpResponse<InputStream>> future) {
+  public <T> Future<ApiResponse<T>> prepareResponse(ApiResponse<T> apiResponse, TypeReference<T> typeReference,
+                                                    CompletableFuture<HttpResponse<InputStream>> future) {
     return future.thenCompose(response -> {
       int statusCode = response.statusCode();
       setPageDetails(apiResponse, response.headers());
@@ -60,7 +61,8 @@ public class ApiResponseBuilder {
         } finally {
           try {
             response.body().close();
-          } catch (Exception ignored) { }
+          } catch (Exception ignored) {
+          }
         }
 
       }

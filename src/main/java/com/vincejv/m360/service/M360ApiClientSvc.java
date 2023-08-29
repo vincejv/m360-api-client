@@ -8,6 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 import com.vincejv.m360.dto.ApiResponse;
 import com.vincejv.m360.dto.ApiRequest;
@@ -18,6 +19,7 @@ import com.vincejv.m360.util.HttpConstants;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 
 @AllArgsConstructor
 public class M360ApiClientSvc {
@@ -36,12 +38,18 @@ public class M360ApiClientSvc {
     this.httpClient = httpClient;
   }
 
-  public <T> CompletableFuture<ApiResponse<T>> httpPost(String uri, ApiResponse<T> apiResponse,
-                                                        TypeReference<T> typeReference,
-                                                        ApiRequest apiRequest) {
+  public <T> Future<ApiResponse<T>> httpPost(String uri, ApiResponse<T> apiResponse,
+                                                      TypeReference<T> typeReference,
+                                                      ApiRequest apiRequest) {
     return apiResponseBuilder.prepareResponse(apiResponse, typeReference,
-      executePost(uri, apiRequest));
+      CompletableFuture.supplyAsync(() -> getInputStreamHttpResponse(uri, apiRequest)));
   }
+
+  @SneakyThrows
+  private HttpResponse<InputStream> getInputStreamHttpResponse(String uri, ApiRequest apiRequest) {
+      return executePost(uri, apiRequest).get();
+  }
+
 
   private HttpRequest.Builder buildBaseRequest(String url) throws URISyntaxException {
     return HttpRequest.newBuilder(new URI(url))
@@ -70,7 +78,7 @@ public class M360ApiClientSvc {
       .POST(HttpRequest.BodyPublishers.noBody()).build();
   }
 
-  public CompletableFuture<HttpResponse<InputStream>> executeGet(String url) {
+  public Future<HttpResponse<InputStream>> executeGet(String url) {
     try {
       return httpClient.sendAsync(getHttpGet(url),
         HttpResponse.BodyHandlers.ofInputStream());
@@ -79,13 +87,13 @@ public class M360ApiClientSvc {
     }
   }
 
-  public CompletableFuture<HttpResponse<InputStream>> executePost(String url, InputStream stream)
+  public Future<HttpResponse<InputStream>> executePost(String url, InputStream stream)
     throws URISyntaxException {
     return httpClient.sendAsync(getHttpPost(url, stream),
       HttpResponse.BodyHandlers.ofInputStream());
   }
 
-  public CompletableFuture<HttpResponse<InputStream>> executePost(String url, ApiRequest request)
+  public Future<HttpResponse<InputStream>> executePost(String url, ApiRequest request)
   {
     try {
       if (request != null) {
@@ -102,7 +110,7 @@ public class M360ApiClientSvc {
     }
   }
 
-  public CompletableFuture<HttpResponse<InputStream>> executePost(String url, String postBody)
+  public Future<HttpResponse<InputStream>> executePost(String url, String postBody)
     throws URISyntaxException {
     return httpClient.sendAsync(getHttpPost(url,
         postBody.getBytes(StandardCharsets.UTF_8)),

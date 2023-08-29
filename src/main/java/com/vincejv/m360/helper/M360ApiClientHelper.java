@@ -2,7 +2,7 @@ package com.vincejv.m360.helper;
 
 import java.net.URI;
 import java.net.http.HttpClient;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 import com.vincejv.m360.dto.ApiResponse;
 import com.vincejv.m360.dto.BroadcastRequest;
@@ -41,13 +41,13 @@ public class M360ApiClientHelper {
     this.senderId = senderId;
   }
 
-  public CompletableFuture<ApiResponse<BroadcastResponse>> sendBroadcastMessage(BroadcastRequest broadcastRequest) {
+  public Future<ApiResponse<BroadcastResponse>> sendBroadcastMessage(BroadcastRequest broadcastRequest) {
     return svc.httpPost(getUrl(Constants.BROADCAST), new ApiResponse<BroadcastResponse>(),
       new TypeReference<BroadcastResponse>() {
       }, broadcastRequest);
   }
 
-  public CompletableFuture<ApiResponse<BroadcastResponse>> sendBroadcastMessage(SMSRequest smsRequest) {
+  public Future<ApiResponse<BroadcastResponse>> sendBroadcastMessage(SMSRequest smsRequest) {
     var broadcastRequest = new BroadcastRequest();
     broadcastRequest.setAppKey(appKey);
     broadcastRequest.setAppSecret(appSecret);

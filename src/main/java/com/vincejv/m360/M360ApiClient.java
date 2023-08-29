@@ -1,6 +1,6 @@
 package com.vincejv.m360;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 import com.vincejv.m360.dto.ApiResponse;
 import com.vincejv.m360.dto.BroadcastRequest;
@@ -18,15 +18,15 @@ public class M360ApiClient {
     m360ApiClientHelper = new M360ApiClientHelper(baseApiUrl, appKey, appSecret, senderId);
   }
 
-  public CompletableFuture<ApiResponse<BroadcastResponse>> sendBroadcastMessage(BroadcastRequest broadcastRequest) {
+  public Future<ApiResponse<BroadcastResponse>> sendBroadcastMessage(BroadcastRequest broadcastRequest) {
     return m360ApiClientHelper.sendBroadcastMessage(broadcastRequest);
   }
 
-  public CompletableFuture<ApiResponse<BroadcastResponse>> sendBroadcastMessage(SMSRequest smsRequest) {
+  public Future<ApiResponse<BroadcastResponse>> sendBroadcastMessage(SMSRequest smsRequest) {
     return m360ApiClientHelper.sendBroadcastMessage(smsRequest);
   }
 
-  public CompletableFuture<ApiResponse<BroadcastResponse>> sendBroadcastMessage(String msisdn, String message) {
+  public Future<ApiResponse<BroadcastResponse>> sendBroadcastMessage(String msisdn, String message) {
     var msgRequest = new SMSRequest();
     msgRequest.setMobileNumber(msisdn);
     msgRequest.setContent(message);

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class PageInfo {
+
   private int totalPages;
   private int totalRecords;
   private int currentPage;
