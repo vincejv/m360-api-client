@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
 import com.vincejv.m360.dto.ApiResponse;
-import com.vincejv.m360.dto.IApiRequest;
+import com.vincejv.m360.dto.ApiRequest;
 import com.vincejv.m360.exception.M360ApiException;
 import com.vincejv.m360.util.ApiResponseBuilder;
 import com.vincejv.m360.util.Constants;
@@ -38,7 +38,7 @@ public class M360ApiClientSvc {
 
   public <T> CompletableFuture<ApiResponse<T>> httpPost(String uri, ApiResponse<T> apiResponse,
                                                         TypeReference<T> typeReference,
-                                                        IApiRequest apiRequest) {
+                                                        ApiRequest apiRequest) {
     return apiResponseBuilder.prepareResponse(apiResponse, typeReference,
       executePost(uri, apiRequest));
   }
@@ -85,7 +85,7 @@ public class M360ApiClientSvc {
       HttpResponse.BodyHandlers.ofInputStream());
   }
 
-  public CompletableFuture<HttpResponse<InputStream>> executePost(String url, IApiRequest request)
+  public CompletableFuture<HttpResponse<InputStream>> executePost(String url, ApiRequest request)
   {
     try {
       if (request != null) {

@@ -22,11 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @AllArgsConstructor
-public class SMSRequest implements IApiRequest {
+public class SMSRequest extends ApiRequest {
 
   @JsonProperty("msisdn")
   private String mobileNumber;
