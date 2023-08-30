@@ -14,6 +14,4 @@ import lombok.NoArgsConstructor;
 @JsonInclude(Include.NON_NULL)
 public class ApiRequest {
 
-  private LocalDateTime timestamp;
-
 }
