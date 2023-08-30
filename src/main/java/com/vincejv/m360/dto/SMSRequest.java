@@ -19,6 +19,7 @@
 package com.vincejv.m360.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vincejv.m360.util.SMSUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,11 +47,17 @@ public class SMSRequest extends ApiRequest {
    * 8 - UCS2 (ISO/IEC-10646)
    */
   @JsonProperty("dcs")
-  private Integer dataCodingScheme;
+  private DCSCoding dataCodingScheme;
 
   public SMSRequest() {
     isInternational = false;
-    dataCodingScheme = 0;
+    dataCodingScheme = DCSCoding.GSM0338;
   }
 
+  public SMSRequest(String mobileNumber, String content) {
+    this();
+    this.mobileNumber = mobileNumber;
+    this.content = content;
+    this.dataCodingScheme = SMSUtil.isEncodeableInGsm0338(content) ? DCSCoding.GSM0338 : DCSCoding.UCS2;
+  }
 }
