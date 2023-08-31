@@ -1,7 +1,6 @@
 package com.vincejv.m360.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -9,7 +8,6 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@AllArgsConstructor
 public class BroadcastRequest extends SMSRequest {
 
   @JsonProperty("app_key")
@@ -25,4 +23,17 @@ public class BroadcastRequest extends SMSRequest {
     super();
   }
 
+  public BroadcastRequest(String mobileNumber, String content, Boolean isInternational, DCSCoding dataCodingScheme, String appKey, String appSecret, String senderId) {
+    super(mobileNumber, content, isInternational, dataCodingScheme);
+    this.appKey = appKey;
+    this.appSecret = appSecret;
+    this.senderId = senderId;
+  }
+
+  public BroadcastRequest(String mobileNumber, String content, String appKey, String appSecret, String senderId) {
+    super(mobileNumber, content);
+    this.appKey = appKey;
+    this.appSecret = appSecret;
+    this.senderId = senderId;
+  }
 }

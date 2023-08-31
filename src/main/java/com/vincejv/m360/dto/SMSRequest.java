@@ -50,8 +50,8 @@ public class SMSRequest extends ApiRequest {
   private DCSCoding dataCodingScheme;
 
   public SMSRequest() {
-    isInternational = false;
-    dataCodingScheme = DCSCoding.GSM0338;
+    this.isInternational = false;
+    this.dataCodingScheme = DCSCoding.GSM0338;
   }
 
   public SMSRequest(String mobileNumber, String content) {

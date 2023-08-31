@@ -26,7 +26,7 @@ public class M360ApiClientHelper {
   private final String baseApiUrl;
 
   public M360ApiClientHelper(String baseApiUrl, String appKey, String appSecret, String senderId) {
-    svc = new M360ApiClientSvc();
+    this.svc = new M360ApiClientSvc();
     this.baseApiUrl = baseApiUrl;
     this.appKey = appKey;
     this.appSecret = appSecret;
@@ -34,7 +34,7 @@ public class M360ApiClientHelper {
   }
 
   public M360ApiClientHelper(HttpClient httpClient, String baseApiUrl, String appKey, String appSecret, String senderId) {
-    svc = new M360ApiClientSvc(httpClient);
+    this.svc = new M360ApiClientSvc(httpClient);
     this.baseApiUrl = baseApiUrl;
     this.appKey = appKey;
     this.appSecret = appSecret;
